@@ -74,17 +74,24 @@
   const input = document.getElementById("input");
   const messages = document.getElementById("messages");
 
+  // Ask for username when page loads
+  const username = prompt("Enter your name 👤");
+
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     if (input.value.trim()) {
-      socket.emit("chat message", input.value);
+      const msg = {
+        name: username,
+        text: input.value
+      };
+      socket.emit("chat message", msg);
       input.value = "";
     }
   });
 
   socket.on("chat message", function(msg) {
     const item = document.createElement("li");
-    item.textContent = msg;
+    item.textContent = `💬 ${msg.name}: ${msg.text}`;
     messages.appendChild(item);
     messages.scrollTop = messages.scrollHeight;
   });
