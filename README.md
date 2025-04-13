@@ -1,1 +1,1 @@
-# whisperchat_app
+# whisperchat
